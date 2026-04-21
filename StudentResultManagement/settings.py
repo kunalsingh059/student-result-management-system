@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-@j=pf+9$@bcx)&m61eib@$8cwsezimb)@nhoy16yii173bx)5z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -49,6 +49,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this line
+    # ... other middlewares
 ]
 
 ROOT_URLCONF = 'StudentResultManagement.urls'
@@ -120,3 +123,16 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
         BASE_DIR / "resultapp" / "static"
     ]
+
+
+import dj_database_url
+import os
+
+# At the bottom of the file
+DATABASES = {
+    'default': dj_database_url.config(
+        default='sqlite:///db.sqlite3',
+        conn_max_age=600,
+        ssl_require=False if 'localhost' in os.environ.get('HOSTNAME', '') else True
+    )
+}
