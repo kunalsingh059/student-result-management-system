@@ -1,0 +1,40 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %} 
+<div class="container">
+    <h2 class="mb-4"> <i class="fas fa-plus-circle"></i> Create Student Class</h2>
+
+    {% if messages %}
+        {% for m in messages %}
+            <div class="alert alert-{% if m.tags == 'error' %}danger{% else %}success{% endif  %} alert-dismissible fade show">
+                {{ m }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="classname" class="form-label">Class Name</label>
+            <input type="text" class="form-control" id="classname" name="classname" placeholder="Enter Class Name" required>
+            <small class="text-muted">e.g. First, Second, Third</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="classnumeric" class="form-label">Class Name In Numeric</label>
+            <input type="text" class="form-control" id="classnumeric" name="classnumeric" placeholder="Enter Class Name in Numeric" required>
+            <small class="text-muted">e.g. 1, 2, 3</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="section" class="form-label">Section</label>
+            <input type="text" class="form-control" id="section" name="section" placeholder="Enter Section" required>
+            <small class="text-muted">e.g. A, B, C</small>
+        </div>
+
+        <button type="submit" class="btn btn-success">
+           <i class="fas fa-check-circle me-1"></i> Submit
+        </button>
+    </form>
+</div>
+{% endblock %}

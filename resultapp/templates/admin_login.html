@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card shadow">
+        <div class="card-header text-center bg-dark text-white">
+          <h2><i class="fas fa-user-shield"></i> Admin Login</h2>
+        </div>
+        <div class="card-body">
+            {% if error %}
+                <div class="alert alert-danger text-center">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label"> <i class="fas fa-user"></i> UserName</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Enter Username" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label"> <i class="fas fa-lock"></i> Password</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" required>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">
+                    Login <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

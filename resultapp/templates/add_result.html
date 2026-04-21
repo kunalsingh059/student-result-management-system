@@ -1,0 +1,82 @@
+{% extends 'admin_base.html' %} {% load static %} {% block content %}
+<div class="container">
+  <h2 class="mb-4"><i class="fas fa-plus"></i> Declare Result</h2>
+
+  {% if messages %} {% for m in messages %}
+  <div
+    class="alert alert-{% if m.tags == 'error' %}danger{% else %}success{% endif %} alert-dismissible fade show"
+  >
+    {{ m }}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endfor %} {% endif %}
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="class_id" class="form-label">Select Class</label>
+      <select class="form-select" id="class_id" name="class" required>
+        <option value="">-- Select Class --</option>
+        {% for i in classes %}
+        <option value="{{ i.id }}">
+          {{ i.class_name }} - Section {{i.section}}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="student_id" class="form-label">Select Student</label>
+      <select class="form-select" id="student_id" name="studentid" required>
+        <option value="">-- Select Student --</option>
+      </select>
+    </div>
+
+    <div id="subject_fields"></div>
+
+    <button type="submit" class="btn btn-success">
+      <i class="fas fa-check-circle me-1"></i> Submit
+    </button>
+  </form>
+</div>
+
+<script>
+  document.getElementById("class_id").addEventListener("change", function () {
+    const classId = this.value;
+
+    if (!classId) return;
+
+    fetch(`/get_students_subjects/?class_id=${classId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const studentSelect = document.getElementById("student_id");
+        studentSelect.innerHTML =
+          '<option value="">-- Select Student --</option>';
+
+        data.students.forEach((stu) => {
+          const option = document.createElement("option");
+          option.value = stu.id;
+          option.text = `${stu.first_name} ${stu.last_name} (Roll No : ${stu.roll_number})`;
+          studentSelect.appendChild(option);
+        });
+
+        const subjectFields = document.getElementById("subject_fields");
+        subjectFields.innerHTML = '<h5 class="mt-5">Subjects and Marks</h5>';
+
+        data.subjects.forEach((sub) => {
+          const div = document.createElement("div");
+          div.className = "mb-3";
+          div.innerHTML = `<label class="form-label">${sub.name}</label>
+          <input type="number" name="marks_${sub.id}" class="form-control" required>`;
+          subjectFields.appendChild(div);
+        });
+      });
+  });
+</script>
+
+{% endblock %}

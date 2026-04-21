@@ -1,0 +1,96 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container py-5" id="example">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card shadow">
+        <div class="card-header text-center bg-dark text-white">
+          <h2><i class="fas fa-graduation-cap"></i> Student Result Details</h2>
+        </div>
+        <div class="card-body">
+          {% if messages %} {% for m in messages %}
+          <div
+            class="alert alert-{% if m.tags == 'error' %}danger{% else %}success{% endif %} alert-dismissible fade show"
+          >
+            {{ m }}
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+          {% endfor %} {% endif %}
+
+          <p>
+            <strong>Student Name:</strong> {{student.first_name}}
+            {{student.last_name}}
+          </p>
+          <p><strong>Roll Number:</strong> {{student.roll_number}}</p>
+          <p>
+            <strong>Class:</strong> {{student.student_class.class_name}} -
+            Section {{student.student_class.section}}
+          </p>
+
+          {% if results %}
+          <table class="table table-bordered mt-4 text-center">
+            <thead class="table-dark">
+              <tr>
+                <th>S No.</th>
+                <th>Subject</th>
+                <th>Marks Obtained</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for r in results %}
+              <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{r.subject.subject_name}}</td>
+                <td>{{r.marks_obtained}}</td>
+              </tr>
+              {% endfor %}
+              <tr class="table-secondary">
+                <th colspan="2">Total Marks</th>
+                <td><b>{{total_marks}}</b> out of <b>{{max_marks}}</b></td>
+              </tr>
+
+              <tr class="table-secondary">
+                <th colspan="2">Percentage</th>
+                <td><b>{{percentage}}%</b></td>
+              </tr>
+            </tbody>
+            <tr>
+              <td colspan="3">
+                <i
+                  class="fa fa-print fa-2x"
+                  style="cursor: pointer"
+                  onclick="printResult()"
+                ></i>
+              </td>
+            </tr>
+          </table>
+          {% else %}
+          <div class="alert alert-warning">
+            Your result is not declared yet.
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function printResult() {
+    var content = document.getElementById("example").innerHTML;
+    var win = window.open("", "", "height=700, width=900");
+    win.document.write("<html><head><title>Print Result</title>");
+    win.document.write('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">');
+    win.document.write('<style>@media print {body { -webkit-print-color-adjust : exact;}}</style>')
+    win.document.write("</head><body>");
+    win.document.write(content);
+    win.document.write("</body></html>");
+    win.document.close();
+    win.print();
+  }
+</script>
+{% endblock %}

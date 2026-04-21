@@ -1,0 +1,44 @@
+ {% extends 'admin_base.html' %} {% load static %} {% block content %}
+<div class="container">
+  <h2 class="mb-4"><i class="fas fa-bullhorn"></i> Manage Notice </h2>
+
+  {% if messages %} {% for m in messages %}
+  <div
+    class="alert alert-{% if m.tags == 'error' %}danger{% else %}success{% endif %} alert-dismissible fade show">
+    {{ m }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %} {% endif %}
+
+  <table
+    class="table table-striped table-bordered table-hover datatable table-responsive align-middle text-center"
+  >
+    <thead class="table-dark">
+      <tr>
+        <th>S.No.</th>
+        <th>Notice Title</th>
+        <th>Notice Details</th>
+        <th>Posting Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in notices %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.notice_title}}</td>
+        <td>{{i.notice_detail}}</td>
+        <td>{{i.posting_date}}</td>
+        <td>
+        <a href="?delete={{i.id}}" onclick="return confirm('Do you want to delete this Notice?')" class="btn btn-danger btn-sm"> <i class="fas fa-trash"></i> Delete</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="7" class="text-center">No Notices found</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

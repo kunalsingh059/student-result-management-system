@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card shadow">
+        <div class="card-header text-center bg-dark text-white">
+          <h2><i class="fas fa-graduation-cap"></i> Search Result</h2>
+        </div>
+        <div class="card-body p-4">
+          {% if messages %} {% for m in messages %}
+          <div
+            class="alert alert-{% if m.tags == 'error' %}danger{% else %}success{% endif %} alert-dismissible fade show"
+          >
+            {{ m }}
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+            ></button>
+          </div>
+          {% endfor %} {% endif %}
+          <form method="post" action="{% url 'check_result' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="rollnumber" class="form-label">Roll Number:</label>
+              <input
+                type="text"
+                name="rollnumber"
+                id="rollnumber"
+                class="form-control"
+                placeholder="Enter Roll Number"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="class" class="form-label">Select Class</label>
+              <select class="form-select" id="class" name="class" required>
+                <option value="">-- Select Class --</option>
+                {% for i in classes %}
+                <option value="{{ i.id }}">
+                  {{ i.class_name }} - Section {{i.section}}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">
+              <i class="fas fa-check"></i> Search Result
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

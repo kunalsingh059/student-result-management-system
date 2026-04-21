@@ -1,0 +1,40 @@
+{% extends 'admin_base.html' %} {% load static %} {% block content %}
+<div class="container">
+  <h2 class="mb-4"><i class="fas fa-plus"></i> Add Subject Combination</h2>
+
+  {% if messages %} {% for m in messages %}
+  <div
+    class="alert alert-{% if m.tags == 'error' %}danger{% else %}success{% endif %} alert-dismissible fade show"
+  >
+    {{ m }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+  {% endfor %} {% endif %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="class" class="form-label">Select Class</label>
+      <select class="form-select" id="class" name="class" required>
+        <option value="">-- Select Class --</option>
+         {% for i in classes %}
+        <option value="{{ i.id }}">{{ i.class_name }} - Section {{i.section}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="subject" class="form-label">Select Subject</label>
+      <select class="form-select" id="subject" name="subject" required>
+        <option value="">-- Select Subject --</option>
+        {% for i in subjects %}
+        <option value="{{ i.id }}">{{ i.subject_name }} - {{i.subject_code}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+      <i class="fas fa-check-circle me-1"></i> Submit
+    </button>
+  </form>
+</div>
+{% endblock %}

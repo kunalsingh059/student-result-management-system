@@ -1,0 +1,61 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %} 
+<div class="container">
+    <h2 class="mb-4"> <i class="fas fa-edit"></i> Edit Result - {{student.first_name}} {{student.last_name}}</h2>
+
+    {% if messages %}
+        {% for m in messages %}
+            <div class="alert alert-{% if m.tags == 'error' %}danger{% else %}success{% endif  %} alert-dismissible fade show">
+                {{ m }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <form method="post" class="card p-4 shadow-sm">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label"><strong>Class :</strong></label>
+            <div>{{student.student_class.class_name}} - {{student.student_class.section}}</div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><strong>Full Name :</strong></label>
+            <div>{{student.first_name}} {{student.last_name}}</div>
+        </div>
+  
+        <h5 class="mt-4">Subjects and marks</h5>
+        <div class="row">
+            {% for res in results %}
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">{{res.subject.subject_name}}</label>
+                    <input type="hidden" name="id[]" value="{{res.id}}">
+                    <input type="number" class="form-control" name="marks[]" required value="{{res.marks_obtained}}">
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-success">
+           <i class="fas fa-check-circle me-1"></i> Update Result
+        </button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded',function(){
+        const form = document.querySelector('form')
+
+        form.addEventListener('submit', ()=>{
+            const ids = form.querySelectorAll('input[name="id[]"]');
+            const marks = form.querySelectorAll('input[name="marks[]"]');
+
+            ids.forEach(input=>input.name = "id[]");
+            marks.forEach(input=>input.name = "marks[]");
+
+        });
+    });
+</script>
+
+{% endblock %}
