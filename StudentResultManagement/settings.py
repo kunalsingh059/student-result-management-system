@@ -128,11 +128,15 @@ STATICFILES_DIRS = [
 import dj_database_url
 import os
 
-# At the bottom of the file
+import dj_database_url
+import os
+
+# This logic checks if we are running on Render or locally
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:///db.sqlite3',
         conn_max_age=600,
-        ssl_require=False if 'localhost' in os.environ.get('HOSTNAME', '') else True
+        # Only require SSL if we are NOT on our local machine
+        ssl_require=False if os.environ.get('RENDER') is None else True
     )
 }
