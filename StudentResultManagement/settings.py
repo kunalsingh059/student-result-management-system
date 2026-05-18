@@ -21,9 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 SECRET_KEY = 'django-insecure-@j=pf+9$@bcx)&m61eib@$8cwsezimb)@nhoy16yii173bx)5z'
 
-DEBUG = True   # ⚠️ Keep True for now, later change to False in production
+DEBUG = False   # ⚠️ Keep True for now, later change to False in production
 
-ALLOWED_HOSTS = ['*']   # ⚠️ Works for now, later restrict this
+ALLOWED_HOSTS = ['.onrender.com', '127.0.0.1', 'localhost']  
 
 
 # APPLICATIONS
@@ -128,3 +128,5 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # ✅ Enables proper static serving in production
+
+LOGIN_URL = 'admin-login'
