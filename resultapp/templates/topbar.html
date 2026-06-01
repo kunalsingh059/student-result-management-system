@@ -16,103 +16,106 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto gap-2 mt-2 mt-lg-0">
+        <!-- Mobile Admin Panel -->
+        <div class="d-md-none">
+          <li class="nav-item">
+            <span class="nav-link text-warning fw-bold">ADMIN PANEL</span>
+          </li>
 
-  <!-- Mobile Admin Panel -->
-  <div class="d-md-none">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'create_class' %}">
+              Create Class
+            </a>
+          </li>
 
-    <li class="nav-item">
-      <span class="nav-link text-warning fw-bold">ADMIN PANEL</span>
-    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'manage_classes' %}">
+              Manage Classes
+            </a>
+          </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'create_class' %}">
-        Create Class
-      </a>
-    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'create_subject' %}">
+              Create Subject
+            </a>
+          </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'manage_classes' %}">
-        Manage Classes
-      </a>
-    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'manage_subject' %}">
+              Manage Subjects
+            </a>
+          </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'create_subject' %}">
-        Create Subject
-      </a>
-    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'add_student' %}"> Add Student </a>
+          </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'manage_subject' %}">
-        Manage Subjects
-      </a>
-    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'manage_subject' %}">
+              Manage Subjects
+            </a>
+          </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'add_student' %}">
-        Add Student
-      </a>
-    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'add_subject_combination' %}">
+              Add Subject Combination
+            </a>
+          </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'manage_students' %}">
-        Manage Students
-      </a>
-    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'manage_subject_combination' %}">
+              Manage Subject Combination
+            </a>
+          </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'add_result' %}">
-        Add Result
-      </a>
-    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'add_result' %}"> Add Result </a>
+          </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'manage_result' %}">
-        Manage Results
-      </a>
-    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'manage_result' %}">
+              Manage Results
+            </a>
+          </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'add_notice' %}">
-        Add Notice
-      </a>
-    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'add_notice' %}"> Add Notice </a>
+          </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'manage_notice' %}">
-        Manage Notices
-      </a>
-    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'manage_notice' %}">
+              Manage Notices
+            </a>
+          </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'change_password' %}">
-        Change Password
-      </a>
-    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'change_password' %}">
+              Change Password
+            </a>
+          </li>
 
-    <hr class="text-secondary">
-  </div>
+          <hr class="text-secondary" />
+        </div>
 
-  <!-- Desktop + Mobile -->
-  <li class="nav-item">
-    <a
-      class="btn btn-outline-warning w-100"
-      href="{% url 'admin_dashboard' %}"
-    >
-      <i class="fas fa-home"></i> Dashboard
-    </a>
-  </li>
+        <!-- Desktop + Mobile -->
+        <li class="nav-item">
+          <a
+            class="btn btn-outline-warning w-100"
+            href="{% url 'admin_dashboard' %}"
+          >
+            <i class="fas fa-home"></i> Dashboard
+          </a>
+        </li>
 
-  <li class="nav-item">
-    <a
-      class="btn btn-outline-danger w-100"
-      href="{% url 'admin_logout' %}"
-    >
-      <i class="fas fa-sign-out-alt"></i> Logout
-    </a>
-  </li>
-
-</ul>
+        <li class="nav-item">
+          <a
+            class="btn btn-outline-danger w-100"
+            href="{% url 'admin_logout' %}"
+          >
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
