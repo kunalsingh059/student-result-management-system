@@ -3,7 +3,6 @@
   .sidebar {
     background-color: #343a40;
     min-height: 100vh;
-    width: 280px;
   }
 
   .sidebar .nav-link {
@@ -14,56 +13,9 @@
     background-color: #495057;
     color: #ffc107;
   }
-
-  /* Mobile */
-  @media (min-width: 768px) {
-    .sidebar {
-      position: sticky;
-      top: 0;
-    }
-  }
 </style>
 
-<!-- Mobile Toggle Button -->
-<button
-  class="btn btn-dark d-md-none m-2"
-  type="button"
-  data-bs-toggle="offcanvas"
-  data-bs-target="#adminSidebar"
->
-  <i class="fas fa-bars"></i>
-</button>
-
-<nav
-  id="adminSidebar"
-  class="sidebar bg-dark offcanvas-md offcanvas-start text-white"
-  tabindex="-1"
->
-
-<div class="offcanvas-header d-md-none">
-    <h5 class="offcanvas-title text-white">Admin Panel</h5>
-
-    <button
-        type="button"
-        class="btn-close btn-close-white"
-        data-bs-dismiss="offcanvas"
-        data-bs-target="#adminSidebar"
-        aria-label="Close">
-    </button>
-</div>
-
-  <div class="p-2 d-md-none">
-    <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#adminSidebar"
-        aria-controls="adminSidebar"
-    >
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
-
+<nav class="col-md-3 sidebar bg-dark pt-3 d-none d-md-block">
   <div class="text-white text-center">
     <img
       src="{% static 'images/admin.avif' %}"
